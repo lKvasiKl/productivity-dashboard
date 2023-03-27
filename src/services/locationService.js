@@ -12,15 +12,12 @@ const getCityFromGeocodingAPI = async (lat, lng) => {
     try {
         const response = await axios.get(GOOGLE_GEOCODING_URL, {
             params: {
-                language: "en",
                 latlng: `${lat},${lng}`,
                 key: `${process.env.GOOGLE_API_KEY}`,
             },
         });
 
-        const city = (response.data.results[0].address_components.find(component => component.types.includes('locality')).long_name).toLowerCase();;
-
-        return city;
+        return (response.data.results[0].address_components.find(component => component.types.includes('locality')).long_name).toLowerCase();
     } catch (error) {
         console.error(error);
     }
