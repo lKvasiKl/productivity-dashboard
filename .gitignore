@@ -1,0 +1,8 @@
+## Directory-based project format:
+.idea/
+
+# Project exclude paths
+/node_modules/
+
+# dotenv environment variable files
+.env
