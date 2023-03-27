@@ -23,6 +23,7 @@ const workingArea = document.querySelector('[data-working-area]');
 
     if (mainFocus && lastVisitDate < date.getDate()) {
         localStorage.removeItem('mainFocus');
+        localStorage.removeItem('checkboxState');
         mainFocusUnmount();
         mainFocusInputMount();
     }

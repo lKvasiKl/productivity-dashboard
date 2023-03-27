@@ -1,14 +1,14 @@
-import { getQuote } from "../../services/quoteService";
+import {getQuote} from "../../services/quoteService";
 
 const currentDate = new Date().getDate();
 
-function updateDailyQuote() {
+async function updateDailyQuote() {
     const quoteText = document.querySelector('[data-quote]');
     const quoteData = localStorage.getItem('quote');
     const lastVisitDate = localStorage.getItem('lastVisitDate');
 
     if (!quoteData || lastVisitDate < currentDate) {
-        updateQuote();
+        await updateQuote();
     }
 
     quoteText.textContent = localStorage.getItem('quote');
@@ -16,7 +16,12 @@ function updateDailyQuote() {
 
 async function updateQuote() {
     const quoteText = document.querySelector('[data-quote]');
-    const quote = await getQuote()
+    let quote = undefined;
+
+    while (!quote) {
+        quote = await getQuote();
+    }
+
     localStorage.setItem('quote', `"${quote}"`);
     localStorage.setItem('lastVisitDate', currentDate);
     quoteText.textContent = localStorage.getItem('quote');

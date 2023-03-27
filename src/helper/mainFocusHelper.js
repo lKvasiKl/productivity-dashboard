@@ -11,7 +11,7 @@ const mainFocusDeleteBtn = mainFocusNode.querySelector('[data-main-focus-delete]
 
 const mainFocusCheckboxHandler = () => updateCheckboxState();
 const mainFocusOpenDropdownHandler = () => showDropdown();
-const mainFocusCloseDropdawnHandler = (event) => closeDropdown(event);
+const mainFocusCloseDropdownHandler = (event) => closeDropdown(event);
 const mainFocusEditHandler = () => editMainFocus();
 const mainFocusDeleteHandler = () => deleteMainFocus();
 
@@ -23,10 +23,10 @@ function mainFocusMount() {
 
     mainFocusCheckbox.addEventListener('click', mainFocusCheckboxHandler);
     const savedCheckboxState = localStorage.getItem('checkboxState');
-    mainFocusCheckbox.checked = savedCheckboxState === 'checked' ? true : false;
+    mainFocusCheckbox.checked = savedCheckboxState === 'checked';
 
     mainFocusDropdownBtn.addEventListener('click', mainFocusOpenDropdownHandler);
-    window.addEventListener('click', mainFocusCloseDropdawnHandler);
+    window.addEventListener('click', mainFocusCloseDropdownHandler);
 
     mainFocusEditBtn.addEventListener('click', mainFocusEditHandler);
     mainFocusDeleteBtn.addEventListener('click', mainFocusDeleteHandler);
@@ -35,7 +35,7 @@ function mainFocusMount() {
 function mainFocusUnmount() {
     mainFocusCheckbox.removeEventListener('click', mainFocusCheckboxHandler);
     mainFocusDropdownBtn.removeEventListener('click', mainFocusOpenDropdownHandler);
-    window.removeEventListener('click', mainFocusCloseDropdawnHandler);
+    window.removeEventListener('click', mainFocusCloseDropdownHandler);
     mainFocusEditBtn.removeEventListener('click', mainFocusEditHandler);
     mainFocusDeleteBtn.removeEventListener('click', mainFocusDeleteHandler);
     

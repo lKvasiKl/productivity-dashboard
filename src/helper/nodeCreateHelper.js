@@ -1,8 +1,6 @@
 function createNode(templateId) {
     const template = document.getElementById(templateId);
-    const node = template.content.firstElementChild.cloneNode(true);
-
-    return node;
+    return template.content.firstElementChild.cloneNode(true);
 }
 
 export {

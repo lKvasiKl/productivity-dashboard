@@ -7,10 +7,10 @@ const updateQuoteButton = quoteNode.querySelector('[data-update-quote-button]');
 
 const updateQuoteHandler = () => updateQuote();
 
-function quoteMount() {
+async function quoteMount() {
     workingAreaContent.appendChild(quoteNode);
     updateQuoteButton.addEventListener('click', updateQuoteHandler);
-    updateDailyQuote();
+    await updateDailyQuote();
 }
 
 function quoteUnmount() {

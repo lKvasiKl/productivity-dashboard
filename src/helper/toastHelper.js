@@ -1,8 +1,3 @@
-// const getTransitionDuration = element => {
-//     const duration = getComputedStyle(element)['transitionDuration'];
-//     return duration.includes('ms') ? parseFloat(duration) : parseFloat(duration) * 1000;
-// };
-
 class ToastNotifications {
     static hideDelay = 7000;
 
@@ -56,6 +51,7 @@ class ToastNotifications {
 
     hideMessageNode(messageNode) {
         messageNode.classList.add('toast__message-hidden');
+        setTimeout(() => messageNode.remove(), 1000);
     }
 
     showSuccess({ title = '', text = '' } = {}) {

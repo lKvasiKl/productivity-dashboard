@@ -15,6 +15,7 @@ function logout() {
     pageUnmount();
     
     localStorage.removeItem('mainFocus');
+    localStorage.removeItem('checkboxState');
     loginMount();
 }
 

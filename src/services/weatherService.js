@@ -4,7 +4,7 @@ const OPENWEATHER_API_URL = process.env.OPENWEATHER_URL;
 
 const getWeather = async (city) => {
     const OPENWEATHER_API_PARAMS = {
-        q: `${encodeURIComponent(city)}`,
+        q: `${city}`,
         units: 'metric',
         appid: `${process.env.OPENWEATHER_API_KEY}`,
     };

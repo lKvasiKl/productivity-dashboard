@@ -1,5 +1,6 @@
-import { assignFocus } from "../widgets/main-focus/main-focus";
-import { createNode } from "./nodeCreateHelper";
+import {assignFocus} from "../widgets/main-focus/main-focus";
+import {createNode} from "./nodeCreateHelper";
+import {toastNotifications} from "./toastHelper";
 
 const workingAreaContent = document.querySelector('.main');
 const questionInputNode = createNode('main-focus-input-template');

@@ -18,16 +18,16 @@ const locationOpenDropdownHandler = () => showLocationDropdown();
 const locationCloseDropdownHandler = (event) => closeLocationDropdown(event);
 const currentLocationHandler = () => getCurrentLocation();
 const resetLocationInputHandler = () => clearLocationInput();
-const locationEnterKeydownHandler = (event) => {
+const locationEnterKeydownHandler = async (event) => {
     if (event.key === 'Enter') {
-        updateLocation();
+        await updateLocation();
     }
 }
 
-const imageUrl = '../../images/';
+const imageUrl = '../images/';
 let isLocationDropdownOpen = false;
 
-function weatherMount() {
+async function weatherMount() {
     workingAreaContent.appendChild(weatherNode);
 
     weatherDropdownBtn.addEventListener('click', weatherOpenDropdownHandler);
@@ -39,7 +39,7 @@ function weatherMount() {
     locationInputResetBtn.addEventListener('click', resetLocationInputHandler);
     locationInput.addEventListener('keydown', locationEnterKeydownHandler);
 
-    updateWeatherData();
+    await updateWeatherData();
 }
 
 function weatherUnmount() {
@@ -102,13 +102,13 @@ function closeLocationDropdown(event) {
     hideLocationDropdown();
 }
 
-function updateLocation() {
+async function updateLocation() {
     localStorage.setItem('previousLocation', localStorage.getItem('currentLocation'));
     localStorage.setItem('currentLocation', locationInput.value.toLowerCase());
     
     hideLocationDropdown();
     hideWeatherDropdown();
-    updateWeatherData();
+    await updateWeatherData();
 }
 
 async function getCurrentLocation() {
@@ -117,7 +117,7 @@ async function getCurrentLocation() {
     
     hideLocationDropdown();
     hideWeatherDropdown();
-    updateWeatherData();
+    await updateWeatherData();
 }
 
 function clearLocationInput() {
