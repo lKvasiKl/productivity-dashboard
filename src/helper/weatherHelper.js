@@ -9,11 +9,11 @@ const weatherDropdown = weatherNode.querySelectorAll('[data-weather-dropdown]');
 const weatherLocationBtn = weatherNode.querySelector('[data-location-dropdown-button]');
 const locationDropdown = weatherNode.querySelector('[data-location-dropdown]');
 const locationInput = weatherNode.querySelector('[data-location-input]');
-const curretLocationBtn = weatherNode.querySelector('[data-current-location-button]');
+const currentLocationBtn = weatherNode.querySelector('[data-current-location-button]');
 const locationInputResetBtn = weatherNode.querySelector('[data-reset-button]');
 
 const weatherOpenDropdownHandler = () => showWeatherDropdown();
-const weatherCloseDropdawnHandler = (event) => closeWeatherDropdown(event);
+const weatherCloseDropdownHandler = (event) => closeWeatherDropdown(event);
 const locationOpenDropdownHandler = () => showLocationDropdown();
 const locationCloseDropdownHandler = (event) => closeLocationDropdown(event);
 const currentLocationHandler = () => getCurrentLocation();
@@ -24,7 +24,7 @@ const locationEnterKeydownHandler = (event) => {
     }
 }
 
-const imageUrl = '../../images/weatherIcons/';
+const imageUrl = '../../images/';
 let isLocationDropdownOpen = false;
 
 function weatherMount() {
@@ -32,10 +32,10 @@ function weatherMount() {
 
     weatherDropdownBtn.addEventListener('click', weatherOpenDropdownHandler);
     weatherLocationBtn.addEventListener('click', locationOpenDropdownHandler);
-    window.addEventListener('click', weatherCloseDropdawnHandler, true);
+    window.addEventListener('click', weatherCloseDropdownHandler, true);
     window.addEventListener('click', locationCloseDropdownHandler, true);
 
-    curretLocationBtn.addEventListener('click', currentLocationHandler);
+    currentLocationBtn.addEventListener('click', currentLocationHandler);
     locationInputResetBtn.addEventListener('click', resetLocationInputHandler);
     locationInput.addEventListener('keydown', locationEnterKeydownHandler);
 
@@ -45,10 +45,10 @@ function weatherMount() {
 function weatherUnmount() {
     weatherDropdownBtn.removeEventListener('click', weatherOpenDropdownHandler);
     weatherLocationBtn.removeEventListener('click', locationOpenDropdownHandler);
-    window.removeEventListener('click', weatherCloseDropdawnHandler, true);
+    window.removeEventListener('click', weatherCloseDropdownHandler, true);
     window.removeEventListener('click', locationCloseDropdownHandler, true);
 
-    curretLocationBtn.removeEventListener('click', currentLocationHandler);
+    currentLocationBtn.removeEventListener('click', currentLocationHandler);
     locationInputResetBtn.removeEventListener('click', resetLocationInputHandler);
     locationInput.removeEventListener('keydown', locationEnterKeydownHandler);
 
