@@ -1,0 +1,8 @@
+@import '../assets/mixins';
+
+.user-actions {
+    @include flex-self-start;
+    justify-self: end;
+    grid-area: actions;
+    margin: 10px 20px;
+}

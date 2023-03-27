@@ -1,0 +1,16 @@
+@import '../assets/mixins';
+
+.links-search {
+    @include flex-self-start;
+    grid-area: links;
+    margin: 10px 20px;
+    gap: 15px;
+    cursor: pointer;
+
+    &__text {
+        font-size: 20px;
+        color: $white;
+        max-width: 48px;
+        overflow: hidden;
+    }
+}

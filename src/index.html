@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Productivity dashboard</title>
+</head>
+
+<body>
+    <section data-working-area class="working-area">
+        <div class="main">
+
+        </div>
+    </section>
+</body>
+
+<template id="authorization-login-template">
+    <section data-authorization class="authorization">
+        <label class="text">
+            Hello, what's your name?
+            <input data-authorization-input class="input input__text">
+        </label>
+    </section>
+</template>
+
+<template id="links-search-template">
+    <section data-links-search class="links-search">
+        <span class="text links-search__text">Links</span>
+        <img width="30px" height="30px" src="./images/search.svg" alt="search" class="image">
+    </section>
+</template>
+
+<template id="background-settings-template">
+    <section class="bg-image-settings">
+        <button data-bg-settings-button class="button bg-image-settings__button"></button>
+        <span data-bg-settings-text class="text bg-image-settings__text"></span>
+    </section>
+</template>
+
+<template id="clock-greeting-template">
+    <section data-clock-greeting class="clock-greeting">
+        <span data-clock class="clock clock__text"></span>
+        <span data-greeting class="text text__greeting"></span>
+    </section>
+</template>
+
+<template id="quote-template">
+    <section class="quote">
+        <button data-update-quote-button class="button quote__button"></button>
+        <span data-quote data-scrollable class="quote__text"></span>
+    </section>
+</template>
+
+<template id="main-focus-input-template">
+    <section class="main-focus-input">
+        <label class="text main-focus-input__text">
+            What is your main focus for today?
+            <input data-main-focus-input maxlength="200" class="input input__text main-focus-input__text main-focus-input__input">
+        </label>
+    </section>
+</template>
+
+<template id="main-focus-template">
+    <section class="main-focus">
+        <span class="text main-focus__today">TODAY</span>
+        <div class="main-focus__container">
+            <label class="main-focus__checkbox" for="my-checkbox">
+                <input data-main-focus-checkbox type="checkbox" class="main-focus__real-checkbox" id="my-checkbox">
+                <span class="main-focus__custom-checkbox"></span>
+                <span data-main-focus maxlength="200" class="text main-focus__text"></span>
+            </label>
+            <div class="dropdown">
+                <button data-dropdown-button class="button main-focus__button"></button>
+                <div data-main-focus-dropdown class="dropdown__content">
+                    <button data-main-focus-edit class="button dropdown__button">Edit</button>
+                    <button data-main-focus-delete class="button dropdown__button">Delete</button>
+                </div>
+            </div>
+        </div>
+    </section>
+</template>
+
+<template id="weather-template">
+    <section class="weather dropdown">
+        <div data-weather class="weather__container">
+            <div class="weather__container_dir_inline">
+                <img data-weather-icon width="50px" height="50px" class="image weather__icon" alt="Weather icon">
+                <span data-weather-temperature class="text weather__text"></span>
+            </div>
+            <span data-weather-location class="text text_type_location"></span>
+        </div>
+        <div data-weather-dropdown class="weather__dropdown-treangle"></div>
+        <div data-weather-dropdown class="weather__dropdown-content">
+            <div class="dropdown__content_type_weather">
+                <div class="weather__description">
+                    <span data-weather-location class="text weather__text_type_location"></span>
+                    <span data-weather-description class="text weather__text_type_description"></span>
+                </div>
+                <button data-location-dropdown-button class="button weather__button"></button>
+                <div data-location-dropdown class="weather__location-input-container">
+                    <div class="weather__location-input">
+                        <input data-location-input placeholder="Type a location" class="input input_type_location">
+                        <div class="button__container">
+                            <button data-current-location-button class="button button_type_current-location"></button>
+                            <button data-reset-button class="button button_type_reset"></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="dropdown__content_type_additioonal">
+                <div class="weather__temperature">
+                    <img data-weather-icon width="50px" height="50px" class="image weather__icon" alt="Weather icon">
+                    <span data-weather-temperature class="text weather__text_type_temperature"></span>
+                </div>
+                <div class="weather__additioonal-content">
+                    <div>
+                        <span class="text weather__text_type_description">Feels like</span>
+                        <span data-weather-feel-temperature class="text weather__text_type_description-content"></span>
+                    </div>
+                    <div>
+                        <span class="text weather__text_type_description">Recent rain</span>
+                        <span data-weather-recent-rain class="text weather__text_type_description-content"></span>
+                    </div>
+                    <div>
+                        <span class="text weather__text_type_description">Wind</span>
+                        <span data-weather-wind class="text weather__text_type_description-content"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</template>
+
+<template id="authorization-logout-template">
+    <section class="user-actions">
+        <button class="button button_type_logout text">Logout</button>
+    </section>
+</template>
+
+</html>

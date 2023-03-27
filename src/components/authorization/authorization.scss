@@ -1,0 +1,10 @@
+@import '../assets/mixins';
+
+.authorization {
+    @include flex-self-center;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    width: 350px;
+    grid-area: 2 / 2 / 5 / 5;
+}

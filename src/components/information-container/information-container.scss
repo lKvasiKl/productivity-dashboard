@@ -1,0 +1,7 @@
+@import '../assets/mixins';
+
+.information-container {
+    @include flex-center;
+    flex-direction: column;
+    width: 350px;
+}

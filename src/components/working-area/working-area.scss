@@ -1,0 +1,14 @@
+@import '../assets/mixins';
+
+body {
+    margin: 0;
+}
+
+.working-area {
+    @include flex-center;
+    margin: 0;
+    height: 100vh;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}

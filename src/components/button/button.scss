@@ -1,0 +1,43 @@
+@import '../assets/colors';
+@import '../assets/mixins';
+
+.button {
+    padding: 0;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+
+    &__container {
+        padding: 0 10px;
+        display: flex;
+        gap: 5px;
+    }
+
+    &_type {
+        &_logout {
+            max-width: 62px;
+            overflow: hidden;
+            height: 25px;
+            font-size: 20px;
+            justify-content: center;
+        }
+    }
+
+    &_type {
+        &_current-location {
+            width: 20px;
+            height: 20px;
+            background-size: cover;
+            background-image: url('/src/images/aim.svg');
+        }
+    }
+
+    &_type {
+        &_reset {
+            width: 20px;
+            height: 20px;
+            background-size: cover;
+            background-image: url('/src/images/reset.svg');
+        }
+    }
+}

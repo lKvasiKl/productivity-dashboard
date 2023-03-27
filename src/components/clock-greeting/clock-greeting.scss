@@ -1,0 +1,8 @@
+@import '../assets/mixins';
+
+.clock-greeting {
+    @include flex-self-end-center;
+    flex-direction: column;
+    align-items: center;
+    grid-area: clockGreeting;
+}

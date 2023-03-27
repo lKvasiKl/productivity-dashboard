@@ -1,0 +1,27 @@
+@import '../assets/colors';
+
+.text {
+    text-align: center;
+    font-size: 30px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: $white;
+
+    &::first-letter {
+        text-transform: uppercase;
+    }
+
+    &__greeting {
+        font-size: 40px;
+        max-height: 45px;
+        overflow: hidden;
+    }
+
+    &_type {
+        &_location {
+            font-size: 15px;
+            height: 17px;
+            max-width: 200px;
+            overflow: hidden;
+        }
+    }
+}

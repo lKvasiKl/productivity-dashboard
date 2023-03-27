@@ -1,0 +1,26 @@
+@import '../assets/colors';
+@import '../assets/mixins';
+
+.bg-image-settings {
+    @include flex-self-end-start;
+    align-items: center;
+    grid-area: bgSettings;
+    margin: 10px 20px;
+
+    &__button {
+        background-size: cover;
+        background-image: url('/src/images/settings.svg');
+        width: 30px;
+        height: 30px;
+    }
+
+    &__text {
+        overflow: hidden;
+        max-height: 65px;
+        max-width: 150px;
+        font-size: 20px;
+        color: $gray;
+    }
+    
+}
+
