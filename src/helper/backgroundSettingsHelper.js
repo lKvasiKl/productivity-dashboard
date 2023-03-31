@@ -3,7 +3,7 @@ import { createNode } from "./nodeCreateHelper";
 
 const workingAreaContent = document.querySelector('.main');
 const settingsNode = createNode('background-settings-template');
-const settingsButton = settingsNode.querySelector('[data-bg-settings-button]');
+const settingsButton = settingsNode.querySelector('.bg-image-settings__button');
 
 const settingsButtonHandler = () => changeBackgroundImage();
 

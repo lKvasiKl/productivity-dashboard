@@ -1,16 +1,17 @@
 import { getUserPosition } from "../services/locationService";
 import { stopWeatherTimer, updateWeatherData } from "../widgets/weather/weather";
 import { createNode } from "./nodeCreateHelper";
+import { getLocalizedText, setLocale } from "./languageHelper";
 
 const workingAreaContent = document.querySelector('.main');
 const weatherNode = createNode('weather-template');
-const weatherDropdownBtn = weatherNode.querySelector('[data-weather]');
-const weatherDropdown = weatherNode.querySelectorAll('[data-weather-dropdown]');
-const weatherLocationBtn = weatherNode.querySelector('[data-location-dropdown-button]');
-const locationDropdown = weatherNode.querySelector('[data-location-dropdown]');
-const locationInput = weatherNode.querySelector('[data-location-input]');
-const currentLocationBtn = weatherNode.querySelector('[data-current-location-button]');
-const locationInputResetBtn = weatherNode.querySelector('[data-reset-button]');
+const weatherDropdownBtn = weatherNode.querySelector('.weather__container');
+const weatherDropdown = weatherNode.querySelectorAll('.weather__dropdown');
+const weatherLocationBtn = weatherNode.querySelector('.weather__button');
+const locationDropdown = weatherNode.querySelector('.weather__location-input-container');
+const locationInput = weatherNode.querySelector('.input_type_location');
+const currentLocationBtn = weatherNode.querySelector('.button_type_current-location');
+const locationInputResetBtn = weatherNode.querySelector('.button_type_reset');
 
 const weatherOpenDropdownHandler = () => showWeatherDropdown();
 const weatherCloseDropdownHandler = (event) => closeWeatherDropdown(event);
@@ -24,11 +25,12 @@ const locationEnterKeydownHandler = async (event) => {
     }
 }
 
-const imageUrl = '../images/';
+const imageUrl = 'images/';
 let isLocationDropdownOpen = false;
 
 async function weatherMount() {
     workingAreaContent.appendChild(weatherNode);
+    await setLocale();
 
     weatherDropdownBtn.addEventListener('click', weatherOpenDropdownHandler);
     weatherLocationBtn.addEventListener('click', locationOpenDropdownHandler);
@@ -81,8 +83,8 @@ function hideLocationDropdown() {
 }
 
 function closeWeatherDropdown(event) {
-    const isWeatherElement = event.target.closest('[data-weather]');
-    const isWeatherDropdownElement = event.target.closest('[data-weather-dropdown]');
+    const isWeatherElement = event.target.closest('.weather__container');
+    const isWeatherDropdownElement = event.target.closest('.weather__dropdown');
 
     if (isWeatherElement || isWeatherDropdownElement || isLocationDropdownOpen) {
         return;
@@ -92,7 +94,7 @@ function closeWeatherDropdown(event) {
 }
 
 function closeLocationDropdown(event) {
-    const isLocationElement = event.target.closest('[data-location-dropdown]');
+    const isLocationElement = event.target.closest('.weather__location-input-container');
 
     if (isLocationElement) {
         return;
@@ -105,7 +107,7 @@ function closeLocationDropdown(event) {
 async function updateLocation() {
     localStorage.setItem('previousLocation', localStorage.getItem('currentLocation'));
     localStorage.setItem('currentLocation', locationInput.value.toLowerCase());
-    
+
     hideLocationDropdown();
     hideWeatherDropdown();
     await updateWeatherData();
@@ -114,7 +116,7 @@ async function updateLocation() {
 async function getCurrentLocation() {
     const city = await getUserPosition();
     localStorage.setItem("currentLocation", city);
-    
+
     hideLocationDropdown();
     hideWeatherDropdown();
     await updateWeatherData();
@@ -124,14 +126,14 @@ function clearLocationInput() {
     locationInput.value = '';
 }
 
-function renderWeather(weather, city) {
-    const weatherIcons = document.querySelectorAll('[data-weather-icon]');
-    const weatherTemperatures = document.querySelectorAll('[data-weather-temperature]');
-    const weatherFeelTemperature = document.querySelector('[data-weather-feel-temperature]');
-    const weatherRecentRain = document.querySelector('[data-weather-recent-rain]');
-    const weatherWind = document.querySelector('[data-weather-wind]');
-    const weatherLocations = document.querySelectorAll('[data-weather-location]');
-    const weatherDescription = document.querySelector('[data-weather-description]');
+async function renderWeather(weather) {
+    const weatherIcons = document.querySelectorAll('.weather__icon');
+    const weatherTemperatures = document.querySelectorAll('.weather__real-temperature');
+    const weatherFeelTemperature = document.querySelector('.weather__feel-temperature');
+    const weatherRecentRain = document.querySelector('.weather__recent-rain');
+    const weatherWind = document.querySelector('.weather__wind');
+    const weatherLocations = document.querySelectorAll('.text_type_location');
+    const weatherDescription = document.querySelector('.weather__text_type_description');
 
     weatherIcons.forEach((icon) => {
         icon.src = `${imageUrl}${weather.icon}.svg`;
@@ -142,11 +144,11 @@ function renderWeather(weather, city) {
     });
 
     weatherFeelTemperature.textContent = `${weather.realFeelTemperature}°`;
-    weatherRecentRain.textContent = `${weather.recentRain} mm`;
-    weatherWind.textContent = `${weather.wind} m/s`;
+    weatherRecentRain.textContent = `${weather.recentRain} ${await getLocalizedText('mm')}`;
+    weatherWind.textContent = `${weather.wind} ${await getLocalizedText('m/s')}`;
 
     weatherLocations.forEach((location) => {
-        location.textContent = city;
+        location.textContent = weather.location;
     });
 
     weatherDescription.textContent = weather.description;

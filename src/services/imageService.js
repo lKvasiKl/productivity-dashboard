@@ -2,7 +2,7 @@ import axios from "axios";
 
 const UNSPLASH_API_URL = process.env.UNSPLASH_URL;
 const UNSPLASH_API_PARAMS = {
-    query: 'wallpaper',
+    query: 'dark,wallpaper',
     orientation: 'landscape',
 };
 const UNSPLASH_API_AUTH = {
@@ -19,7 +19,7 @@ const getImage = async () => {
         const { data } = response;
 
         return {
-            url: data.urls.regular,
+            url: data.urls.full,
             author_name: data.user.name,
             location: data.location.city,
         };

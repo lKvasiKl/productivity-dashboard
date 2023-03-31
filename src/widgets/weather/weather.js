@@ -1,10 +1,12 @@
-import {getCache, isCacheValid, saveCache} from '../../helper/cacheHelper';
-import {toastNotifications} from '../../helper/toastHelper';
-import {renderWeather} from '../../helper/weatherHelper';
-import {getUserPosition} from '../../services/locationService';
-import {getWeather} from '../../services/weatherService';
+import { getCache, isCacheValid, saveCache } from '../../helper/cacheHelper';
+import { getLocalizedText } from '../../helper/languageHelper';
+import { toastNotifications } from '../../helper/toastHelper';
+import { renderWeather } from '../../helper/weatherHelper';
+import { getUserPosition } from '../../services/locationService';
+import { getWeather } from '../../services/weatherService';
 
 const CACHE_LIFETIME = +(process.env.CACHE_LIFETIME);
+const locale = (navigator.language || navigator.systemLanguage || navigator.userLanguage).substr(0, 2).toLowerCase() || 'en';
 
 let intervalId;
 let currentCity;
@@ -18,13 +20,13 @@ async function getUserLocation() {
 
     city = await getUserPosition();
     city = city.toLowerCase();
-    localStorage.setItem('currentLocation', city);
 
-    return city;
+    localStorage.setItem('currentLocation', city);
 }
 
 async function updateWeatherData() {
-    currentCity = await getUserLocation();
+    await getUserLocation();
+    currentCity = localStorage.getItem('currentLocation');
 
     await updateWeather(currentCity);
     intervalId = setInterval(async () => {
@@ -44,10 +46,11 @@ function stopWeatherTimer() {
 }
 
 async function updateWeather(city) {
-    const cache = getCache();
+    const cache = getCache('weatherCache');
     const cacheEntry = cache[`${city}`];
 
-    if (cacheEntry && isCacheValid(cacheEntry)) {
+    if (cacheEntry && isCacheValid(cacheEntry) && cacheEntry.locale === locale) {
+        renderWeather(cacheEntry.weather, city);
         return;
     }
 
@@ -59,18 +62,20 @@ async function updateWeather(city) {
             localStorage.setItem('currentLocation', previousCity);
 
             toastNotifications.showError({
-                title: 'Error!',
-                text: `No result for location: ${city}. Please check your input and try again.`,
+                title: await getLocalizedText('error'),
+                text: await getLocalizedText('location-no-result'),
             });
 
             return;
         }
 
         cache[`${city}`] = {
+            locale: `${locale}`,
             weather: weather,
             expirationDate: new Date().getTime() + CACHE_LIFETIME,
         };
-        saveCache(cache);
+
+        saveCache('weatherCache', cache);
         renderWeather(weather, city);
     } catch (error) {
         console.error(error);
@@ -78,6 +83,7 @@ async function updateWeather(city) {
 }
 
 export {
+    getUserLocation,
     updateWeatherData,
     stopWeatherTimer
 };

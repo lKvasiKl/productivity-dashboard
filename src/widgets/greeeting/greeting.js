@@ -1,21 +1,16 @@
-function updateGreeting() {
-    const greetingText = document.querySelector('[data-greeting]');
-    const userName = localStorage.getItem('userName');
+async function updateGreeting() {
+    const greetingText = document.querySelector('.text__greeting');
 
     const date = new Date();
     const time = date.getHours();
 
-    let phrase;
-
     if (time > 5 && time < 12) {
-        phrase = 'Good morning';
+        greetingText.setAttribute("localization-key", "morning-greeting");
     } else if (time >= 12 && time <= 18) {
-        phrase = 'Good afternoon';
+        greetingText.setAttribute("localization-key", "afternoon-greeting");
     } else {
-        phrase = 'Good evening';
+        greetingText.setAttribute("localization-key", "evening-greeting");
     }
-
-    greetingText.textContent = `${phrase}, ${userName}.`.substring(0, 30);
 }
 
 export {

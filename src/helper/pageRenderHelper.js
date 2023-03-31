@@ -7,15 +7,16 @@ import { mainFocusInputMount, mainFocusInputUnmount } from "./mainFocusInputHelp
 import { logoutMount, logoutUnmount } from "./authorizationHelper";
 import { mainFocusMount, mainFocusUnmount } from "./mainFocusHelper";
 import { weatherMount, weatherUnmount } from "./weatherHelper";
+import { getUserLocation } from "../widgets/weather/weather";
+import { toastNotifications } from "../helper/toastHelper";
+import { getLocalizedText, setLocale } from "./languageHelper";
 
-function pageMount() {
+async function pageMount() {
     linksSearchMount();
 
     const info = JSON.parse(localStorage.bgImageInfo);
     settingsButtonMount();
     updateBackgroundMetaInfo(info);
-
-    clockGreetingMount();
 
     const focus = localStorage.getItem('mainFocus');
     if (focus) {
@@ -26,9 +27,20 @@ function pageMount() {
 
     quoteMount();
 
-    weatherMount();
+    navigator.permissions.query({ name: 'geolocation' }).then(function (result) {
+        handlePermission(result);
+        result.onchange = () => handlePermission(result);;
+    });
 
     logoutMount();
+
+    clockGreetingMount();
+
+    let city = localStorage.getItem('currentLocation');
+
+    if (!city) {
+        await getUserLocation();
+    }
 
 }
 
@@ -48,9 +60,33 @@ function pageUnmount() {
 
     quoteUnmount();
 
-    weatherUnmount();
+    if (document.querySelector('.weather')) {
+        weatherUnmount();
+    }
 
     logoutUnmount();
+}
+
+async function handlePermission(permissionStatus) {
+    if (permissionStatus.state === 'granted') {
+        weatherMount();
+    } else if (permissionStatus.state === 'denied') {
+        if (document.querySelector('.weather')) {
+            localStorage.removeItem('weatherPermissionDenied');
+            weatherUnmount();
+        }
+
+        const permissionDenied = localStorage.getItem('weatherPermissionDenied');
+
+        if (!permissionDenied) {
+            localStorage.setItem('weatherPermissionDenied', true);
+
+            toastNotifications.showInfo({
+                title: await getLocalizedText('info'),
+                text: await getLocalizedText('weather-geolocation'),
+            });
+        }
+    }
 }
 
 export {

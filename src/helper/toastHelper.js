@@ -1,3 +1,5 @@
+import { getLocalizedText } from "./languageHelper";
+
 class ToastNotifications {
     static hideDelay = 7000;
 
@@ -24,15 +26,17 @@ class ToastNotifications {
         const messageNode = document.createElement('div');
         const messageTitle = document.createElement('div');
         const crossIcon = this.getCrossIcon();
-
+    
         crossIcon.addEventListener('click', () => this.hideMessageNode(messageNode));
         messageTitle.classList.add('toast__message-title');
-        messageTitle.appendChild(document.createTextNode(title));
         messageNode.classList.add('toast__message');
         messageNode.appendChild(messageTitle);
+        
+        messageTitle.appendChild(document.createTextNode(title));
         messageNode.appendChild(document.createTextNode(text));
+    
         messageNode.appendChild(crossIcon);
-
+    
         return messageNode;
     }
 

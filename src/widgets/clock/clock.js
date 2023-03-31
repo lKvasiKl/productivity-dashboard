@@ -1,7 +1,7 @@
 let intervalId;
 
 function startClockTimer() {
-    const clock = document.querySelector('[data-clock]');
+    const clock = document.querySelector('.clock');
 
     function updateTime() {
         const date = new Date();

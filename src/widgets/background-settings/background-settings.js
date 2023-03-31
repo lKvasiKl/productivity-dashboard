@@ -1,7 +1,7 @@
 import { getImage } from "../../services/imageService.js";
-import {toastNotifications} from "../../helper/toastHelper";
+import { toastNotifications } from "../../helper/toastHelper";
 
-const workingArea = document.querySelector('[data-working-area]');
+const workingArea = document.querySelector('.working-area');
 
 async function changeBackgroundImage() {
     try {
@@ -9,8 +9,8 @@ async function changeBackgroundImage() {
 
         if (!imageInfo) {
             toastNotifications.showInfo({
-                title: 'Bacground Limit!',
-                text: `Sorry, but you can update the background 50 times per hour.`,
+                title: await getLocalizedText('info'),
+                text: await getLocalizedText('background-limit'),
             });
 
             return;
@@ -22,14 +22,14 @@ async function changeBackgroundImage() {
 
         workingArea.style.backgroundImage = `url(${info.url})`;
         updateBackgroundMetaInfo(info);
-    } catch(error) {
+    } catch (error) {
         console.error(error);
     }
-    
+
 }
 
 function updateBackgroundMetaInfo(info) {
-    const imageMetaInfo = document.querySelector('[data-bg-settings-text]');
+    const imageMetaInfo = document.querySelector('.bg-image-settings__text');
     const metaInfo = [];
 
     if (info.author_name) {

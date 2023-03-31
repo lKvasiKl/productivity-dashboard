@@ -2,7 +2,7 @@ import { getImage } from '../services/imageService';
 import { mainFocusUnmount } from './mainFocusHelper';
 import { mainFocusInputMount } from './mainFocusInputHelper';
 
-const workingArea = document.querySelector('[data-working-area]');
+const workingArea = document.querySelector('.working-area');
 
 (async function () {
     const lastVisitDate = localStorage.getItem('lastVisitDate');

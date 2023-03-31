@@ -1,9 +1,9 @@
-function getCache() {
-    return JSON.parse(localStorage.getItem('cache')) || {};
+function getCache(cahceKey) {
+    return JSON.parse(localStorage.getItem(cahceKey)) || {};
 }
 
-function saveCache(cache) {
-    localStorage.setItem('cache', JSON.stringify(cache));
+function saveCache(cahceKey, cache) {
+    localStorage.setItem(cahceKey, JSON.stringify(cache));
 }
 
 function isCacheValid(cacheEntry) {

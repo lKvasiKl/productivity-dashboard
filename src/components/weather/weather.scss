@@ -5,6 +5,7 @@
     flex-direction: column;
     align-items: center;
     justify-self: end;
+    align-self: start;
     max-width: 200px;
     height: 75px;
     cursor: pointer;
@@ -28,6 +29,7 @@
     }
 
     &__text {
+        color: $white;
         font-size: 25px;
         justify-self: center;
         align-self: center;

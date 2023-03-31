@@ -19,8 +19,7 @@ const getCityFromGeocodingAPI = async (lat, lng) => {
         });
 
         return (response.data.results[0].address_components.find(component => component.types.includes('locality')).long_name).toLowerCase();
-    } catch (error) {
-        console.error(error);
+    } catch (error) { 
     }
 };
 
@@ -29,10 +28,9 @@ async function getUserPosition() {
         const position = await getCurrentPosition();
         const lat = position.coords.latitude;
         const lng = position.coords.longitude;
-        
+
         return await getCityFromGeocodingAPI(lat, lng);
     } catch (error) {
-        console.error(error);
     }
 }
 

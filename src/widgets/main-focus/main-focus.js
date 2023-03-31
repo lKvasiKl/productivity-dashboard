@@ -1,3 +1,4 @@
+import { getLocalizedText } from "../../helper/languageHelper";
 import { mainFocusMount, mainFocusUnmount } from "../../helper/mainFocusHelper";
 import { mainFocusInputMount, mainFocusInputUnmount } from "../../helper/mainFocusInputHelper";
 import { toastNotifications } from "../../helper/toastHelper";
@@ -10,25 +11,32 @@ const keydownHandler = (event) => {
     }
 }
 
-function assignFocus() {
-    const mainFocusInput = document.querySelector('[data-main-focus-input]');
+async function assignFocus() {
+    const mainFocusInput = document.querySelector('.main-focus-input__input');
+    const mainFocus = mainFocusInput.value.substring(0, 200).trim();
 
-    localStorage.setItem('mainFocus', mainFocusInput.value);
-
-    mainFocusInputUnmount();
-
-    mainFocusMount();
+    if (mainFocus.length > 0) {
+        localStorage.setItem('mainFocus', mainFocus);
+    
+        mainFocusInputUnmount();
+        mainFocusMount();
+    } else {
+        toastNotifications.showInfo({
+            title: await getLocalizedText('info'),
+            text: await getLocalizedText('main-focus-limit'),
+        });
+    }
 }
 
 function updateCheckboxState() {
-    const mainFocusCheckbox = document.querySelector('[data-main-focus-checkbox]');
+    const mainFocusCheckbox = document.querySelector('.main-focus__real-checkbox');
 
     const state = mainFocusCheckbox.checked ? 'checked' : 'unchecked';
     localStorage.setItem('checkboxState', state);
 }
 
 function editMainFocus() {
-    const mainFocus = document.querySelector('[data-main-focus]');
+    const mainFocus = document.querySelector('.main-focus__text');
 
     mainFocus.setAttribute('contenteditable', true);
     mainFocus.focus();
@@ -50,10 +58,10 @@ function editMainFocus() {
 }
 
 function editMainFocusEnd() {
-    const mainFocus = document.querySelector('[data-main-focus]');
+    const mainFocus = document.querySelector('.main-focus__text');
 
     mainFocus.setAttribute('contenteditable', false);
-    localStorage.setItem('mainFocus', mainFocus.textContent);
+    localStorage.setItem('mainFocus', mainFocus.textContent.substring(0, 200));
 
     mainFocus.removeEventListener('blur', blurHandler);
     mainFocus.removeEventListener('keydown', keydownHandler);
@@ -61,7 +69,7 @@ function editMainFocusEnd() {
 }
 
 function deleteMainFocus() {
-    const mainFocusDropdown = document.querySelector('[data-main-focus-dropdown]');
+    const mainFocusDropdown = document.querySelector('.dropdown__content');
     mainFocusDropdown.classList.remove("show");
 
     localStorage.removeItem('mainFocus');
@@ -69,19 +77,19 @@ function deleteMainFocus() {
     mainFocusUnmount();
     mainFocusInputMount();
     
-    const mainFocusInput = document.querySelector('[data-main-focus-input]');
+    const mainFocusInput = document.querySelector('.main-focus-input__input');
     mainFocusInput.value = '';
 }
 
-function checkInputLimit() {      
-    const mainFocus = document.querySelector('[data-main-focus]');
+async function checkInputLimit() {      
+    const mainFocus = document.querySelector('.main-focus__text');
     const maxLength = parseInt(mainFocus.getAttribute('maxlength'));
     const currentLength = mainFocus.textContent.length;
 
     if (currentLength === maxLength) {
         toastNotifications.showInfo({
-            title: 'Input limit!',
-            text: `Maximum length for main focus is ${maxLength}.`,
+            title: await getLocalizedText('info'),
+            text: await getLocalizedText('input-limit'),
         });
 
         editMainFocusEnd();

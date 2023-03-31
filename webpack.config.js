@@ -34,6 +34,7 @@ module.exports = {
         new CopyPlugin({
             patterns: [
                 { from: "src/images", to: "images" },
+                { from: "lang", to: "lang" },
             ],
         }),
         new Dotenv(),
