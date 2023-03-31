@@ -18,13 +18,14 @@ body {
   margin: 0;
   height: 100vh;
   background-position: center;
-  background-size: cover;
   background-repeat: no-repeat;
 }
 
 .main {
   width: 100%;
-  height: 100%;
+  height: 100hv;
+}
+.main__grid {
   display: grid;
   grid-template-areas: "links . . . weather actions" ". . . . . ." ". clockGreeting clockGreeting clockGreeting . ." ". mainFocus mainFocus mainFocus . ." "bgSettings quote quote quote . .";
   grid-template-columns: 20% 20% 20% 20% 10% 10%;
@@ -142,20 +143,21 @@ body {
       -ms-flex-align: center;
           align-items: center;
   grid-area: bgSettings;
-  margin: 10px 20px;
+  padding: 10px 0px 10px 20px;
+  gap: 10px;
 }
 .bg-image-settings__button {
+  -ms-flex-negative: 0;
+      flex-shrink: 0;
   background-size: cover;
   background-image: url(e20a812b465499171f95.svg);
   width: 30px;
   height: 30px;
 }
 .bg-image-settings__text {
-  overflow: hidden;
-  max-height: 65px;
-  max-width: 150px;
   font-size: 20px;
   color: #969292;
+  text-align: left;
 }
 
 .button {
@@ -200,14 +202,12 @@ body {
   align-self: start;
   justify-self: start;
   grid-area: links;
-  margin: 10px 20px;
+  padding: 10px 20px;
   gap: 15px;
-  cursor: pointer;
 }
 .links-search__text {
   font-size: 20px;
   color: #ffffff;
-  max-width: 48px;
   overflow: hidden;
 }
 
@@ -234,12 +234,13 @@ body {
       -ms-flex-align: center;
           align-items: center;
   grid-area: quote;
-  margin: 10px 20px;
+  padding: 10px 20px;
   gap: 5px;
 }
+.quote__container {
+  display: none;
+}
 .quote__text {
-  max-width: 750px;
-  max-height: 70px;
   font-size: 20px;
   text-align: center;
   font-family: Arial, Helvetica, sans-serif;
@@ -288,7 +289,7 @@ body {
   gap: 5px;
 }
 .main-focus-input__input {
-  width: inherit;
+  width: 100%;
 }
 
 .main-focus {
@@ -415,7 +416,7 @@ body {
   justify-self: start;
   justify-self: end;
   grid-area: actions;
-  margin: 10px 20px;
+  padding: 10px 20px;
 }
 
 .dropdown {
@@ -440,14 +441,14 @@ body {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  margin: 20px;
+  padding: 20px;
 }
 .dropdown__content_type_additioonal {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  margin: 0 20px;
-  gap: 50px;
+  padding: 0 20px;
+  gap: 30px;
 }
 .dropdown__button {
   width: 100%;
@@ -474,6 +475,7 @@ body {
       -ms-flex-align: center;
           align-items: center;
   justify-self: end;
+  align-self: start;
   max-width: 200px;
   height: 75px;
   cursor: pointer;
@@ -501,6 +503,7 @@ body {
   height: 50px;
 }
 .weather__text {
+  color: #ffffff;
   font-size: 25px;
   justify-self: center;
   -ms-flex-item-align: center;
@@ -690,4 +693,49 @@ body {
   -webkit-transform: translateX(50%);
           transform: translateX(50%);
   opacity: 0;
+}
+
+.loader {
+  display: none;
+  border: 8px solid rgba(0, 0, 0, 0.1019607843);
+  border-top: 8px solid #ffffff;
+  border-radius: 50%;
+  width: 25px;
+  height: 25px;
+  -webkit-animation: spin 1s linear infinite;
+          animation: spin 1s linear infinite;
+}
+
+@-webkit-keyframes spin {
+  from {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+
+@keyframes spin {
+  from {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+.visible {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
