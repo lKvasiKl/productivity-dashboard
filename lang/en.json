@@ -23,5 +23,10 @@
     "weather-geolocation": "In order for the weather widget to appear, you need to enable the use of geolocation.",
     "name-limit": "Your name must contain at least one non-whitespace character.",
     "background-limit": "Background Limit! Sorry, but you can update the background 50 times per hour.",
-    "main-focus-limit": "Your main focus must contain at least one non-whitespace character."
+    "main-focus-limit": "Your main focus must contain at least one non-whitespace character.",
+    "todo-limit": "Your todo must contain at least one non-whitespace character.",
+    "todo": "Todo",
+    "todo-active": "Active",
+    "todo-completed": "Completed",
+    "todo-placeholder": "Add task"
 }
