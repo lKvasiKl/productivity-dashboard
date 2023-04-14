@@ -11,8 +11,14 @@
     cursor: pointer;
     grid-area: weather;
 
+    &__loader {
+        display: none;
+        padding-top: 20px;
+        padding-right: 20px;
+    }
+
     &__container {
-        display: flex;
+        display: none;
         flex-direction: column;
 
         &_dir {
@@ -94,6 +100,10 @@
         background-image: url('/src/images/dotsBlack.svg');
         width: 20px;
         height: 20px;
+
+        &:hover {
+            background-image: url('/src/images/dots-hover.svg');
+        }
     }
 
     &__location-input-container {

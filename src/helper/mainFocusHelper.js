@@ -19,10 +19,6 @@ const mainFocusDeleteHandler = () => deleteMainFocus();
 async function mainFocusMount() {
     workingAreaContent.appendChild(mainFocusNode);
 
-    const greetingText = document.querySelector('.text__greeting');
-    const userName = localStorage.getItem('userName');
-    greetingText.textContent = `${greetingText.textContent}, ${userName}.`;
-
     const mainFocus = document.querySelector('.main-focus__text');
     mainFocus.textContent = localStorage.getItem('mainFocus');
 
@@ -40,17 +36,19 @@ async function mainFocusMount() {
 }
 
 function mainFocusUnmount() {
+    const mainFocusElement = workingAreaContent.querySelector('.main-focus-input');
+
     mainFocusCheckbox.removeEventListener('click', mainFocusCheckboxHandler);
     mainFocusDropdownBtn.removeEventListener('click', mainFocusOpenDropdownHandler);
     window.removeEventListener('click', mainFocusCloseDropdownHandler);
     mainFocusEditBtn.removeEventListener('click', mainFocusEditHandler);
     mainFocusDeleteBtn.removeEventListener('click', mainFocusDeleteHandler);
 
-    workingAreaContent.removeChild(mainFocusNode);
+    workingAreaContent.removeChild(mainFocusElement);
 }
 
 function showDropdown() {
-    const mainFocusDropdown = document.querySelector('.dropdown__content');
+    const mainFocusDropdown = document.querySelector('.main-focus');
 
     mainFocusDropdown.classList.toggle("show");
 }

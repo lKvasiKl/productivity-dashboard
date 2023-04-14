@@ -14,25 +14,55 @@
     }
 
     &_type {
-        &_logout {
-            max-width: 62px;
-            overflow: hidden;
+        &_logout,
+        &_todo {
             height: 25px;
             font-size: 20px;
             justify-content: center;
-        }
-    }
 
-    &_type {
+            &:hover {
+                color: $gray;
+            }
+        }
+        
+        &_edit,
+        &_delete {
+            flex-shrink: 0;
+            width: 20px;
+            height: 20px;
+            color: $white;
+            background-size: cover;
+            justify-content: center;
+
+            &:hover {
+                color: $gray;
+            }
+        }
+
+        &_edit {
+            margin-right: 5px;
+            background-image: url('/src/images/todo-edit.svg');
+
+            &:hover {
+                background-image: url('/src/images/todo-edit-hover.svg');
+            }
+        }
+
+        &_delete {
+            background-image: url('/src/images/trash-can.svg');
+
+            &:hover {
+                background-image: url('/src/images/trash-can-hover.svg');
+            }
+        }
+
         &_current-location {
             width: 20px;
             height: 20px;
             background-size: cover;
             background-image: url('/src/images/aim.svg');
         }
-    }
 
-    &_type {
         &_reset {
             width: 20px;
             height: 20px;

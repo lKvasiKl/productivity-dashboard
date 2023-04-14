@@ -4,14 +4,6 @@ import { createNode } from "./nodeCreateHelper";
 import { getLocalizedText, setLocale } from "./languageHelper";
 
 const workingAreaContent = document.querySelector('.main');
-const weatherNode = createNode('weather-template');
-const weatherDropdownBtn = weatherNode.querySelector('.weather__container');
-const weatherDropdown = weatherNode.querySelectorAll('.weather__dropdown');
-const weatherLocationBtn = weatherNode.querySelector('.weather__button');
-const locationDropdown = weatherNode.querySelector('.weather__location-input-container');
-const locationInput = weatherNode.querySelector('.input_type_location');
-const currentLocationBtn = weatherNode.querySelector('.button_type_current-location');
-const locationInputResetBtn = weatherNode.querySelector('.button_type_reset');
 
 const weatherOpenDropdownHandler = () => showWeatherDropdown();
 const weatherCloseDropdownHandler = (event) => closeWeatherDropdown(event);
@@ -29,6 +21,13 @@ const imageUrl = 'images/';
 let isLocationDropdownOpen = false;
 
 async function weatherMount() {
+    const weatherNode = createNode('weather-template');
+    const weatherDropdownBtn = weatherNode.querySelector('.weather__container');
+    const weatherLocationBtn = weatherNode.querySelector('.weather__button');
+    const locationInput = weatherNode.querySelector('.input_type_location');
+    const currentLocationBtn = weatherNode.querySelector('.button_type_current-location');
+    const locationInputResetBtn = weatherNode.querySelector('.button_type_reset');
+
     workingAreaContent.appendChild(weatherNode);
     await setLocale();
 
@@ -45,6 +44,13 @@ async function weatherMount() {
 }
 
 function weatherUnmount() {
+    const weatherElement = workingAreaContent.querySelector('.weather');
+    const weatherDropdownBtn = weatherElement.querySelector('.weather__container');
+    const weatherLocationBtn = weatherElement.querySelector('.weather__button');
+    const locationInput = weatherElement.querySelector('.input_type_location');
+    const currentLocationBtn = weatherElement.querySelector('.button_type_current-location');
+    const locationInputResetBtn = weatherElement.querySelector('.button_type_reset');
+
     weatherDropdownBtn.removeEventListener('click', weatherOpenDropdownHandler);
     weatherLocationBtn.removeEventListener('click', locationOpenDropdownHandler);
     window.removeEventListener('click', weatherCloseDropdownHandler, true);
@@ -54,23 +60,29 @@ function weatherUnmount() {
     locationInputResetBtn.removeEventListener('click', resetLocationInputHandler);
     locationInput.removeEventListener('keydown', locationEnterKeydownHandler);
 
-    workingAreaContent.removeChild(weatherNode);
+    workingAreaContent.removeChild(weatherElement);
     stopWeatherTimer();
 }
 
 function showWeatherDropdown() {
+    const weatherDropdown = document.querySelectorAll('.weather__dropdown');
+
     weatherDropdown.forEach((el) => {
         el.classList.toggle("show");
     });
 }
 
 function hideWeatherDropdown() {
+    const weatherDropdown = document.querySelectorAll('.weather__dropdown');
+
     weatherDropdown.forEach((el) => {
         el.classList.remove("show");
     });
 }
 
 function showLocationDropdown() {
+    const locationDropdown = document.querySelector('.weather__location-input-container');
+
     isLocationDropdownOpen = true;
     locationDropdown.classList.toggle("show-location")
 
@@ -78,8 +90,10 @@ function showLocationDropdown() {
 }
 
 function hideLocationDropdown() {
+    const locationDropdown = document.querySelector('.weather__location-input-container');
+    
     isLocationDropdownOpen = false;
-    locationDropdown.classList.remove("show-location")
+    locationDropdown.classList.remove("show-location");
 }
 
 function closeWeatherDropdown(event) {
@@ -123,6 +137,8 @@ async function getCurrentLocation() {
 }
 
 function clearLocationInput() {
+    const locationInput = document.querySelector('.input_type_location');
+
     locationInput.value = '';
 }
 

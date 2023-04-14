@@ -61,7 +61,8 @@ function editMainFocusEnd() {
     const mainFocus = document.querySelector('.main-focus__text');
 
     mainFocus.setAttribute('contenteditable', false);
-    localStorage.setItem('mainFocus', mainFocus.textContent.substring(0, 200));
+    localStorage.setItem('mainFocus', mainFocus.textContent.substring(0, 200).trim());
+    mainFocus.textContent = localStorage.getItem('mainFocus');
 
     mainFocus.removeEventListener('blur', blurHandler);
     mainFocus.removeEventListener('keydown', keydownHandler);
@@ -86,7 +87,7 @@ async function checkInputLimit() {
     const maxLength = parseInt(mainFocus.getAttribute('maxlength'));
     const currentLength = mainFocus.textContent.length;
 
-    if (currentLength === maxLength) {
+    if (currentLength >= maxLength) {
         toastNotifications.showInfo({
             title: await getLocalizedText('info'),
             text: await getLocalizedText('input-limit'),

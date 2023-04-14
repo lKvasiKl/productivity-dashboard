@@ -8,8 +8,8 @@
             "links . . . weather actions"
             ". . . . . ."
             ". clockGreeting clockGreeting clockGreeting . ."
-            ". mainFocus mainFocus mainFocus . ."
-            "bgSettings quote quote quote . .";
+            ". mainFocus mainFocus mainFocus todo todo"
+            "bgSettings quote quote quote todo todo";
         grid-template-columns: 20% 20% 20% 20% 10% 10%;
         grid-template-rows: repeat(5, 20%);
     }

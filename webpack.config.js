@@ -35,6 +35,7 @@ module.exports = {
             patterns: [
                 { from: "src/images", to: "images" },
                 { from: "lang", to: "lang" },
+                { from: "src/audio", to: "audio" },
             ],
         }),
         new Dotenv(),

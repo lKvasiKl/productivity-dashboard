@@ -6,7 +6,6 @@ const currentDate = new Date().getDate();
 const locale = (navigator.language || navigator.systemLanguage || navigator.userLanguage).substr(0, 2).toLowerCase() || 'en';
 
 async function updateDailyQuote() {
-    const quoteText = document.querySelector('.quote__text');
     const quoteData = localStorage.getItem('quote');
     const lastVisitDate = localStorage.getItem('lastVisitDate');
 

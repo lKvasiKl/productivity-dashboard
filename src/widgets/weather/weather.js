@@ -46,10 +46,12 @@ function stopWeatherTimer() {
 }
 
 async function updateWeather(city) {
+    showLoader();
     const cache = getCache('weatherCache');
     const cacheEntry = cache[`${city}`];
 
     if (cacheEntry && isCacheValid(cacheEntry) && cacheEntry.locale === locale) {
+        hideLoader();
         renderWeather(cacheEntry.weather, city);
         return;
     }
@@ -66,6 +68,9 @@ async function updateWeather(city) {
                 text: await getLocalizedText('location-no-result'),
             });
 
+            hideLoader();
+            renderWeather(weather, city);
+
             return;
         }
 
@@ -76,10 +81,33 @@ async function updateWeather(city) {
         };
 
         saveCache('weatherCache', cache);
+        hideLoader();
         renderWeather(weather, city);
     } catch (error) {
         console.error(error);
     }
+}
+
+function showLoader() {
+    const weatherContainer = document.querySelector('.weather');
+    const weather = weatherContainer.querySelector('.weather__container');
+    const weatherLoader = weatherContainer.querySelector('.weather__loader');
+    const loader = weatherContainer.querySelector('.loader');
+
+    weatherLoader.classList.toggle('visible');
+    loader.classList.toggle('visible');
+    weather.classList.remove('visible');
+}
+
+function hideLoader() {
+    const weatherContainer = document.querySelector('.weather');
+    const weather = weatherContainer.querySelector('.weather__container');
+    const weatherLoader = weatherContainer.querySelector('.weather__loader');
+    const loader = weatherContainer.querySelector('.loader');
+
+    weatherLoader.classList.toggle('visible');
+    loader.classList.remove('visible');
+    weather.classList.toggle('visible');
 }
 
 export {

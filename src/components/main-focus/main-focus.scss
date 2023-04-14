@@ -67,7 +67,7 @@
         margin-left: 5px;
         margin-right: 20px;
         word-wrap: break-word;
-        max-width: 935px;
+        max-width: 535px;
         display: block;
 
         &[contenteditable="true"] {
@@ -80,5 +80,9 @@
         background-image: url('/src/images/dots.svg');
         width: 20px;
         height: 20px;
+
+        &:hover {
+            background-image: url('/src/images/dots-hover.svg');
+        }
     }
 }

@@ -29,7 +29,8 @@ function logout() {
     localStorage.removeItem('quoteCache');
     localStorage.removeItem('currentLocation');
     localStorage.removeItem('weatherPermissionDenied');
-
+    localStorage.removeItem('tasks');
+    localStorage.removeItem('isTodoDropdownOpen');
 }
 
 export {

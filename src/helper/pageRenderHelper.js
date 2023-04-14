@@ -9,7 +9,8 @@ import { mainFocusMount, mainFocusUnmount } from "./mainFocusHelper";
 import { weatherMount, weatherUnmount } from "./weatherHelper";
 import { getUserLocation } from "../widgets/weather/weather";
 import { toastNotifications } from "../helper/toastHelper";
-import { getLocalizedText, setLocale } from "./languageHelper";
+import { getLocalizedText } from "./languageHelper";
+import { todoMount, todoUnmount } from "./todoHelper";
 
 async function pageMount() {
     linksSearchMount();
@@ -36,12 +37,13 @@ async function pageMount() {
 
     clockGreetingMount();
 
+    todoMount();
+
     let city = localStorage.getItem('currentLocation');
 
     if (!city) {
         await getUserLocation();
     }
-
 }
 
 function pageUnmount() {
@@ -63,6 +65,8 @@ function pageUnmount() {
     if (document.querySelector('.weather')) {
         weatherUnmount();
     }
+
+    todoUnmount();
 
     logoutUnmount();
 }

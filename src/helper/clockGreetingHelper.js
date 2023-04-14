@@ -4,9 +4,9 @@ import { createNode } from "./nodeCreateHelper";
 import { setLocale } from "./languageHelper";
 
 const workingAreaContent = document.querySelector('.main');
-const clockGreetingNode = createNode('clock-greeting-template');
 
 async function clockGreetingMount() {
+    const clockGreetingNode = createNode('clock-greeting-template');
     workingAreaContent.appendChild(clockGreetingNode);
     startClockTimer();
     updateGreeting();
@@ -15,7 +15,9 @@ async function clockGreetingMount() {
 }
 
 function clockGreetingUnmount() {
-    workingAreaContent.removeChild(clockGreetingNode);
+    const clockGreetingElement = workingAreaContent.querySelector('.clock-greeting');
+
+    workingAreaContent.removeChild(clockGreetingElement);
     stopClockTimer();
 }
 

@@ -33,5 +33,6 @@ async function getLocalizedText(key) {
 
 export {
     setLocale,
-    getLocalizedText
+    getLocalizedText,
+    translations
 }

@@ -2,8 +2,6 @@ import { hideLoader, showLoader, updateDailyQuote, updateQuote } from "../widget
 import { createNode } from "./nodeCreateHelper";
 
 const workingAreaContent = document.querySelector('.main');
-const quoteNode = createNode('quote-template');
-const updateQuoteButton = quoteNode.querySelector('.quote__button');
 
 let isUpdateBtn = false;
 
@@ -16,13 +14,19 @@ const updateQuoteHandler = async () => {
 };
 
 async function quoteMount() {
+    const quoteNode = createNode('quote-template');
+    const updateQuoteButton = quoteNode.querySelector('.quote__button');
+
     workingAreaContent.appendChild(quoteNode);
     updateQuoteButton.addEventListener('click', updateQuoteHandler);
     await updateDailyQuote();
 }
 
 function quoteUnmount() {
-    workingAreaContent.removeChild(quoteNode);
+    const quteElement = workingAreaContent.querySelector('.quote');
+    const updateQuoteButton = quteElement.querySelector('.quote__button');
+
+    workingAreaContent.removeChild(quteElement);
     updateQuoteButton.removeEventListener('click', updateQuoteHandler);
 }
 

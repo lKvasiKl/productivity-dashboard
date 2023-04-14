@@ -3,7 +3,6 @@ import { createNode } from "./nodeCreateHelper";
 import { setLocale } from "./languageHelper";
 
 const workingAreaContent = document.querySelector('.main');
-const logoutNode = createNode('authorization-logout-template');
 
 const loginHandler = () => login();
 const logoutHandler = () => logout();
@@ -19,20 +18,23 @@ async function loginMount() {
 
 function loginUnmount() {
     const userNameInput = document.querySelector('.authorization__input');
-    const loginNode = document.querySelector('.authorization');
+    const loginElement = document.querySelector('.authorization');
 
     userNameInput.removeEventListener('change', loginHandler);
-    workingAreaContent.removeChild(loginNode);
+    workingAreaContent.removeChild(loginElement);
 }
 
 function logoutMount() {
+    const logoutNode = createNode('authorization-logout-template');
+
     logoutNode.addEventListener('click', logoutHandler);
     workingAreaContent.appendChild(logoutNode);
 }
 
 function logoutUnmount() {
-    logoutNode.removeEventListener('click', logoutHandler);
-    workingAreaContent.removeChild(logoutNode);
+    const logoutElement = workingAreaContent.querySelector('.user-actions');
+    logoutElement.removeEventListener('click', logoutHandler);
+    workingAreaContent.removeChild(logoutElement);
 }
 
 export {
