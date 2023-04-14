@@ -82,6 +82,7 @@ function hideWeatherDropdown() {
 
 function showLocationDropdown() {
     const locationDropdown = document.querySelector('.weather__location-input-container');
+    const locationInput = document.querySelector('.input_type_location');
 
     isLocationDropdownOpen = true;
     locationDropdown.classList.toggle("show-location")
@@ -119,6 +120,8 @@ function closeLocationDropdown(event) {
 }
 
 async function updateLocation() {
+    const locationInput = document.querySelector('.input_type_location');
+
     localStorage.setItem('previousLocation', localStorage.getItem('currentLocation'));
     localStorage.setItem('currentLocation', locationInput.value.toLowerCase());
 

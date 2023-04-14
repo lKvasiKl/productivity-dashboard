@@ -69,7 +69,6 @@ async function updateWeather(city) {
             });
 
             hideLoader();
-            renderWeather(weather, city);
 
             return;
         }

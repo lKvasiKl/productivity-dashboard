@@ -20,6 +20,7 @@
     "info": "Info!",
     "location-no-result": "No result for location. Please check your input and try again.",
     "input-limit": "Input limit! Maximum length for text input reached.",
+    "input-null": "Text length can't be less than one. Please try again.",
     "weather-geolocation": "In order for the weather widget to appear, you need to enable the use of geolocation.",
     "name-limit": "Your name must contain at least one non-whitespace character.",
     "background-limit": "Background Limit! Sorry, but you can update the background 50 times per hour.",

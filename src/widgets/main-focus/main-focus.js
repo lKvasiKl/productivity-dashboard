@@ -7,6 +7,7 @@ const limitHandler = () => checkInputLimit();
 const blurHandler = () => editMainFocusEnd();
 const keydownHandler = (event) => {
     if (event.key === 'Enter') {
+        event.preventDefault();
         editMainFocusEnd();
     }
 }
@@ -17,7 +18,7 @@ async function assignFocus() {
 
     if (mainFocus.length > 0) {
         localStorage.setItem('mainFocus', mainFocus);
-    
+
         mainFocusInputUnmount();
         mainFocusMount();
     } else {
@@ -41,32 +42,45 @@ function editMainFocus() {
     mainFocus.setAttribute('contenteditable', true);
     mainFocus.focus();
 
-    const setFocusToEnd = () => {
-        const range = document.createRange();
-        range.selectNodeContents(mainFocus);
-        range.collapse(false);
-        const sel = window.getSelection();
-        sel.removeAllRanges();
-        sel.addRange(range);
-    };
-
-    setFocusToEnd();
+    setFocusToEnd(mainFocus);
 
     mainFocus.addEventListener('blur', blurHandler);
     mainFocus.addEventListener('keydown', keydownHandler);
     mainFocus.addEventListener('input', limitHandler)
 }
 
-function editMainFocusEnd() {
+function setFocusToEnd(mainFocus) {
+    const range = document.createRange();
+        range.selectNodeContents(mainFocus);
+        range.collapse(false);
+        const sel = window.getSelection();
+        sel.removeAllRanges();
+        sel.addRange(range);
+}
+
+async function editMainFocusEnd() {
     const mainFocus = document.querySelector('.main-focus__text');
+    const mainFocusTextLeangth = mainFocus.textContent.length;
 
-    mainFocus.setAttribute('contenteditable', false);
-    localStorage.setItem('mainFocus', mainFocus.textContent.substring(0, 200).trim());
-    mainFocus.textContent = localStorage.getItem('mainFocus');
+    if (mainFocusTextLeangth) {
+        mainFocus.setAttribute('contenteditable', false);
+        localStorage.setItem('mainFocus', mainFocus.textContent.substring(0, 200).trim());
+        mainFocus.textContent = localStorage.getItem('mainFocus');
 
-    mainFocus.removeEventListener('blur', blurHandler);
-    mainFocus.removeEventListener('keydown', keydownHandler);
-    mainFocus.removeEventListener('input', limitHandler);
+        mainFocus.removeEventListener('blur', blurHandler);
+        mainFocus.removeEventListener('keydown', keydownHandler);
+        mainFocus.removeEventListener('input', limitHandler);
+
+    } else {
+        mainFocus.textContent = localStorage.getItem('mainFocus');
+
+        toastNotifications.showInfo({
+            title: await getLocalizedText('info'),
+            text: await getLocalizedText('input-null'),
+        });
+
+        setFocusToEnd(mainFocus);
+    }
 }
 
 function deleteMainFocus() {
@@ -77,12 +91,9 @@ function deleteMainFocus() {
     localStorage.removeItem('checkboxState');
     mainFocusUnmount();
     mainFocusInputMount();
-    
-    const mainFocusInput = document.querySelector('.main-focus-input__input');
-    mainFocusInput.value = '';
 }
 
-async function checkInputLimit() {      
+async function checkInputLimit() {
     const mainFocus = document.querySelector('.main-focus__text');
     const maxLength = parseInt(mainFocus.getAttribute('maxlength'));
     const currentLength = mainFocus.textContent.length;

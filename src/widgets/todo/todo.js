@@ -5,10 +5,11 @@ let draggedItem;
 let droppedItem;
 
 const editTaskHandler = (editItem) => editTask(editItem);
-const blurHandler = (event) => editTaskEnd(event);
 const limitHandler = (event) => checkTodoInputLimit(event);
+const blurHandler = (event) => editTaskEnd(event);
 const keydownHandler = (event) => {
     if (event.key === 'Enter') {
+        event.preventDefault();
         editTaskEnd(event);
     }
 }
@@ -81,38 +82,53 @@ async function addTask() {
 
 function editTask(editItem) {
     const item = editItem.querySelector('.todo__item-text');
+
     item.setAttribute('contenteditable', true);
     item.focus();
 
-    const setFocusToEnd = () => {
-        const range = document.createRange();
-        range.selectNodeContents(item);
-        range.collapse(false);
-        const sel = window.getSelection();
-        sel.removeAllRanges();
-        sel.addRange(range);
-    };
-
-    setFocusToEnd();
+    setFocusToEnd(item);
 
     item.addEventListener('blur', blurHandler);
     item.addEventListener('keydown', keydownHandler);
     item.addEventListener('input', limitHandler);
 }
 
-function editTaskEnd(event) {
+function setFocusToEnd(item) {
+    const range = document.createRange();
+    range.selectNodeContents(item);
+    range.collapse(false);
+    const sel = window.getSelection();
+    sel.removeAllRanges();
+    sel.addRange(range);
+};
+
+async function editTaskEnd(event) {
     const editItem = event.target;
-    editItem.setAttribute('contenteditable', false);
-    editItem.textContent = editItem.textContent.substring(0, 150).trim();
+    const editItemTextLeangth = editItem.textContent.length;
 
     const index = getTaskIndexInLocalStorage(editItem.parentNode);
     const tasks = getTasksFromLocalStorage();
-    tasks[index].text = editItem.textContent;
-    localStorage.setItem('tasks', JSON.stringify(tasks));
 
-    editItem.removeEventListener('blur', blurHandler);
-    editItem.removeEventListener('keydown', keydownHandler);
-    editItem.removeEventListener('input', limitHandler);
+    if (editItemTextLeangth) {
+        editItem.setAttribute('contenteditable', false);
+        editItem.textContent = editItem.textContent.substring(0, 150).trim();
+
+        tasks[index].text = editItem.textContent;
+        localStorage.setItem('tasks', JSON.stringify(tasks));
+
+        editItem.removeEventListener('blur', blurHandler);
+        editItem.removeEventListener('keydown', keydownHandler);
+        editItem.removeEventListener('input', limitHandler);
+    } else {
+        editItem.textContent = tasks[index].text;
+
+        toastNotifications.showInfo({
+            title: await getLocalizedText('info'),
+            text: await getLocalizedText('input-null'),
+        });
+
+        setFocusToEnd(editItem);
+    }
 }
 
 function deleteTask(deleteItem) {
@@ -153,7 +169,7 @@ function bindTaskEvents(listItem) {
 
     checkBox.addEventListener('change', () => {
         if (checkBox.checked) {
-            const sound = new Audio('audio/minecraft_levelup.mp3'); 
+            const sound = new Audio('audio/minecraft_levelup.mp3');
             sound.play();
             taskCompleted(listItem);
         } else {

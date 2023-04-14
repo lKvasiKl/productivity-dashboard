@@ -3,12 +3,6 @@ import { createNode } from "./nodeCreateHelper";
 import { setLocale } from "./languageHelper";
 
 const workingAreaContent = document.querySelector('.main');
-const mainFocusNode = createNode('main-focus-template');
-const mainFocusCheckbox = mainFocusNode.querySelector('.main-focus__real-checkbox');
-const mainFocusDropdownBtn = mainFocusNode.querySelector('.main-focus__button');
-const mainFocusDropdown = mainFocusNode.querySelector('.dropdown__content');
-const mainFocusEditBtn = mainFocusNode.querySelector('.dropdown__button-edit');
-const mainFocusDeleteBtn = mainFocusNode.querySelector('.dropdown__button-delete');
 
 const mainFocusCheckboxHandler = () => updateCheckboxState();
 const mainFocusOpenDropdownHandler = () => showDropdown();
@@ -17,6 +11,13 @@ const mainFocusEditHandler = () => editMainFocus();
 const mainFocusDeleteHandler = () => deleteMainFocus();
 
 async function mainFocusMount() {
+    const mainFocusNode = createNode('main-focus-template');
+
+    const mainFocusCheckbox = mainFocusNode.querySelector('.main-focus__real-checkbox');
+    const mainFocusDropdownBtn = mainFocusNode.querySelector('.main-focus__button');
+    const mainFocusEditBtn = mainFocusNode.querySelector('.dropdown__button-edit');
+    const mainFocusDeleteBtn = mainFocusNode.querySelector('.dropdown__button-delete');
+
     workingAreaContent.appendChild(mainFocusNode);
 
     const mainFocus = document.querySelector('.main-focus__text');
@@ -31,12 +32,16 @@ async function mainFocusMount() {
 
     mainFocusEditBtn.addEventListener('click', mainFocusEditHandler);
     mainFocusDeleteBtn.addEventListener('click', mainFocusDeleteHandler);
-    
+
     await setLocale();
 }
 
 function mainFocusUnmount() {
-    const mainFocusElement = workingAreaContent.querySelector('.main-focus-input');
+    const mainFocusElement = workingAreaContent.querySelector('.main-focus');
+    const mainFocusCheckbox = mainFocusElement.querySelector('.main-focus__real-checkbox');
+    const mainFocusDropdownBtn = mainFocusElement.querySelector('.main-focus__button');
+    const mainFocusEditBtn = mainFocusElement.querySelector('.dropdown__button-edit');
+    const mainFocusDeleteBtn = mainFocusElement.querySelector('.dropdown__button-delete');
 
     mainFocusCheckbox.removeEventListener('click', mainFocusCheckboxHandler);
     mainFocusDropdownBtn.removeEventListener('click', mainFocusOpenDropdownHandler);
@@ -48,12 +53,14 @@ function mainFocusUnmount() {
 }
 
 function showDropdown() {
-    const mainFocusDropdown = document.querySelector('.main-focus');
+    const mainFocusDropdown = document.querySelector('.dropdown__content');
 
     mainFocusDropdown.classList.toggle("show");
 }
 
 function closeDropdown(event) {
+    const mainFocusDropdown = document.querySelector('.dropdown__content');
+
     if (!event.target.matches('.main-focus__button')) {
         mainFocusDropdown.classList.remove("show");
     }
