@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title localization-key="title"></title>
+<script defer src="index.688397787bdd5f27a2bc.js"></script><link href="main.8ef2cd3c802e33e98107.css" rel="stylesheet"></head>
+
+<body>
+    <main>
+        <div class="main main__grid working-area">
+
+        </div>
+    </main>
+</body>
+
+<template id="authorization-login-template">
+    <section class="authorization">
+        <label localization-key="welcome" class="text"></label>
+        <input class="input input__text authorization__input">
+    </section>
+</template>
+
+<template id="links-search-template">
+    <section class="links-search">
+        <span localization-key="links" class="text links-search__text"></span>
+        <img width="30px" height="30px" src="images/search.svg" alt="search" class="image">
+    </section>
+</template>
+
+<template id="background-settings-template">
+    <section class="bg-image-settings">
+        <button class="button bg-image-settings__button"></button>
+        <span class="text bg-image-settings__text"></span>
+    </section>
+</template>
+
+<template id="clock-greeting-template">
+    <section class="clock-greeting">
+        <span class="clock clock__text"></span>
+        <span class="text text__greeting"></span>
+    </section>
+</template>
+
+<template id="quote-template">
+    <section class="quote">
+        <div class="loader"></div>
+        <div class="quote__container">
+            <button class="button quote__button"></button>
+            <span class="quote__text"></span>
+        </div>
+    </section>
+</template>
+
+<template id="main-focus-input-template">
+    <section class="main-focus-input">
+        <label localization-key="main-focus" class="text main-focus-input__text"></label>
+        <input maxlength="200" class="input input__text main-focus-input__text main-focus-input__input">
+    </section>
+</template>
+
+<template id="main-focus-template">
+    <section class="main-focus">
+        <span localization-key="today" class="text main-focus__today"></span>
+        <div class="main-focus__container">
+            <label class="main-focus__checkbox" for="my-checkbox">
+                <input type="checkbox" class="main-focus__real-checkbox" id="my-checkbox">
+                <span class="main-focus__custom-checkbox"></span>
+                <span maxlength="200" class="text main-focus__text"></span>
+            </label>
+            <div class="dropdown">
+                <button class="button main-focus__button"></button>
+                <div class="dropdown__content">
+                    <button localization-key="edit-btn" class="button dropdown__button dropdown__button-edit"></button>
+                    <button localization-key="delete-btn"
+                        class="button dropdown__button dropdown__button-delete"></button>
+                </div>
+            </div>
+        </div>
+    </section>
+</template>
+
+<template id="weather-template">
+    <section class="weather dropdown">
+        <div class="weather__loader">
+            <div class="loader"></div>
+        </div>
+        <div class="weather__container">
+            <div class="weather__container_dir_inline">
+                <img width="50px" height="50px" class="image weather__icon" alt="Weather icon">
+                <span class="text weather__text weather__real-temperature"></span>
+            </div>
+            <span class="text text_type_location"></span>
+        </div>
+        <div class="weather__dropdown-treangle weather__dropdown"></div>
+        <div class="weather__dropdown-content weather__dropdown">
+            <div class="dropdown__content_type_weather">
+                <div class="weather__description">
+                    <span class="text weather__text_type_location text_type_location"></span>
+                    <span class="text weather__text_type_description"></span>
+                </div>
+                <button class="button weather__button"></button>
+                <div class="weather__location-input-container">
+                    <div class="weather__location-input">
+                        <input localization-key="weather-placeholder" class="input input_type_location">
+                        <div class="button__container">
+                            <button class="button button_type_current-location"></button>
+                            <button class="button button_type_reset"></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="dropdown__content_type_additioonal">
+                <div class="weather__temperature">
+                    <img width="50px" height="50px" class="image weather__icon" alt="Weather icon">
+                    <span class="text weather__text_type_temperature weather__real-temperature"></span>
+                </div>
+                <div class="weather__additioonal-content">
+                    <div>
+                        <span localization-key="temperature-feels" class="text weather__text_type_description"></span>
+                        <span class="text weather__text_type_description-content weather__feel-temperature"></span>
+                    </div>
+                    <div>
+                        <span localization-key="weather-rain" class="text weather__text_type_description"></span>
+                        <span class="text weather__text_type_description-content weather__recent-rain"></span>
+                    </div>
+                    <div>
+                        <span localization-key="weather-wind" class="text weather__text_type_description"></span>
+                        <span class="text weather__text_type_description-content weather__wind"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</template>
+
+<template id="todo-template">
+    <section class="todo">
+        <button localization-key="todo" class="button button_type_todo text"></button>
+        <div class="todo__dropdown">
+            <div class="todo__dropdown-task-content">
+                <span localization-key="todo-active" class="text todo__text"></span>
+                <ul draggable="true" class="todo__incomplete-tasks"></ul>
+                <span localization-key="todo-completed" class="text todo__text"></span>
+                <ul draggable="true" class="todo__completed-tasks"></ul>
+            </div>
+            <div class="todo__dropdown-add-task-content">
+                <button class="button todo__button">+</button>
+                <div class="todo__task-input">
+                    <input localization-key="todo-placeholder" maxlength="130" class="input todo__input">
+                    <div class="button__container">
+                        <button class="button button_type_reset"></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</template>
+
+<template id="authorization-logout-template">
+    <section class="user-actions">
+        <button localization-key="logout-btn" class="button button_type_logout text"></button>
+    </section>
+</template>
+
+</html>

@@ -1,0 +1,22 @@
+@import '../assets/mixins';
+
+.main-focus-input {
+    @include flex-self-center;
+    align-self: end;
+    flex-direction: column;
+    align-items: center;
+    grid-area: mainFocus;
+    max-width: 400px;
+    overflow: hidden;
+
+    &__text {
+        display: flex;
+        flex-direction: column;
+        font-size: 25px;
+        gap: 5px;
+    }
+
+    &__input {
+        width: 100%;
+    }
+}

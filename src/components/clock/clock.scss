@@ -1,0 +1,12 @@
+@import '../assets/colors';
+@import '../assets/mixins';
+
+.clock {
+    user-select: none;
+
+    &__text {
+        font-size: 120px;
+        font-family: Arial, Helvetica, sans-serif;
+        color: $white;
+    }
+}

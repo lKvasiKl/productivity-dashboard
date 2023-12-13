@@ -1,0 +1,27 @@
+@import '../assets/colors';
+
+.loader {
+    display: none;
+    border: 8px solid $loader-border;
+    border-top: 8px solid $white;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.visible {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

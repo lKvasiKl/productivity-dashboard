@@ -1,0 +1,25 @@
+@import '../assets/colors';
+@import '../assets/mixins';
+
+.bg-image-settings {
+    @include flex-self-end-start;
+    align-items: center;
+    grid-area: bgSettings;
+    padding: 10px 0px 10px 20px;
+    gap: 10px;
+
+    &__button {
+        flex-shrink: 0;
+        background-size: cover;
+        background-image: url('/src/images/settings.svg');
+        width: 30px;
+        height: 30px;
+    }
+
+    &__text {
+        font-size: 20px;
+        color: $gray;
+        text-align: left;
+    }
+
+}

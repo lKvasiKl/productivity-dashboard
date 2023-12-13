@@ -1,0 +1,27 @@
+@import '../assets/colors';
+
+.input {
+    display: block;
+    border: none;
+    outline: none;
+    background: transparent;
+    border-bottom: 1px solid $white;
+
+    &_type {
+        &_location {
+            padding-left: 10px;
+            border-bottom: none;
+            font-size: 20px;
+            width: 90%;
+
+            &::placeholder {
+                font-size: 15px;
+            }
+        }
+    }
+
+    &__text {
+        font-size: 30px;
+        color: $white;
+    }
+}
